@@ -10,7 +10,8 @@ namespace Anthenics.Converters
     {
         private object IdToCustomer(object value)
         {
-            throw new NotImplementedException();
+            return "Cliente Fake";
+            //throw new NotImplementedException();
             //throw new NotImplementedException();
             /*
             clifor clifor = new clifor();

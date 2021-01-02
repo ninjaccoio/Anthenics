@@ -23,7 +23,7 @@ namespace Anthenics.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
 
-            Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
+            Window.SetStatusBarColor(Android.Graphics.Color.Red);
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
