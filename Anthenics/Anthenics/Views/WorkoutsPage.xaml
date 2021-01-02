@@ -5,9 +5,7 @@
              xmlns:vm="clr-namespace:Anthenics.ViewModels" 
              xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
              x:Class="Anthenics.Views.WorkoutsPage">
-    <ContentPage.BindingContext>
-        <vm:WorkoutsViewModel />
-    </ContentPage.BindingContext>
+
     <ContentPage.Resources>
         <converter:IdToCustomerConverter x:Key="IdToCustomer"/>
     </ContentPage.Resources>

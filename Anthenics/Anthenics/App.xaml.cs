@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Anthenics.Services;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,9 +13,17 @@ namespace Anthenics
             
             InitializeComponent();
 
+            DependencyRegister();
+
             Device.SetFlags(new[] { "Expander_Experimental" });
 
             MainPage = new AppShell();
+        }
+
+        private void DependencyRegister()
+        {
+            //Mocking
+            DependencyService.Register<IWorkoutStore, WorkoutMockStore>();
         }
 
         protected override void OnStart()

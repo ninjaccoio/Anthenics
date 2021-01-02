@@ -2,6 +2,7 @@
 using Anthenics.Services;
 using Anthenics.Views;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,35 +12,31 @@ namespace Anthenics.ViewModels
 {
     public class WorkoutsViewModel : BaseViewModel
     {
-        private readonly WorkoutStore workoutStore = new WorkoutStore();
-
         #region Properties
-        #region Private
-        private ObservableCollection<Workout> workouts;
-        #endregion
-        #region Public
-        public ObservableCollection<Workout> Workouts
+        private Workout selectedWorkout;
+        public Workout SelectedWorkout
         {
-            get => workouts;
-            set { SetProperty(ref workouts, value); }
-        }
-        #endregion
-        #endregion
-
-        public WorkoutsViewModel()
-        {
-            Task.Run(async () =>
+            get => selectedWorkout;
+            set
             {
-                Workouts = new ObservableCollection<Workout>(await workoutStore.GetWorkoutsAsync());
-            });
+                SetProperty(ref selectedWorkout, value);
+                OnWorkoutSelected(value);
+            }
 
         }
+        public ObservableCollection<Workout> Workouts { get; }
+        #endregion
 
         #region Commands
         public ICommand LoadLikeWorkoutsCommand => new Command(() => LoadLikeWotkouts());
         public ICommand GoCustomersCommand => new Command(() => GoCustomers());
         public ICommand GoExercisesCommand => new Command(() => GoExercises());
         #endregion
+
+        public WorkoutsViewModel()
+        {
+            Workouts = new ObservableCollection<Workout>();
+        }
 
         #region Methods
         private void GoCustomers()
@@ -53,6 +50,41 @@ namespace Anthenics.ViewModels
         private static void LoadLikeWotkouts()
         {
             throw new NotImplementedException();
+        }
+        public void OnAppearing()
+        {
+            Task.Factory.StartNew(async () =>
+            {
+                try
+                {
+                    IsBusy = true;
+
+                    Workouts.Clear();
+
+                    var items = await WorkoutStore.GetWorkoutsAsync();
+
+                    foreach(var item in items)
+                    {
+                        Workouts.Add(item);
+                    }
+                }
+                catch(Exception ex)
+                {
+
+                }finally
+                {
+                    IsBusy = false;
+                }
+            });
+        }
+
+        async void OnWorkoutSelected(Workout item)
+        {
+            if (item == null)
+                return;
+
+            // This will push the ItemDetailPage onto the navigation stack
+            //await Shell.Current.GoToAsync($"{nameof(PianificationDetailPage)}?{nameof(PianificationDetailViewModel.Id)}={item.Id}");
         }
         #endregion
 

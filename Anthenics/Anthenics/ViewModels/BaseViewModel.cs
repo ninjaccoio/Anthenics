@@ -1,13 +1,16 @@
-﻿using System;
+﻿using Anthenics.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
+using Xamarin.Forms;
 
 namespace Anthenics.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        public IWorkoutStore WorkoutStore => DependencyService.Get<IWorkoutStore>();
+
         bool isBusy = false;
         public bool IsBusy
         {
