@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:Anthenics.ViewModels"
+             x:Class="Anthenics.Views.ExercisesPage">
+    <ContentPage.BindingContext>
+        <vm:ExercisesViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Add" Command="{Binding GoAddExerciseCommand}"/>
+            </StackLayout>
+            
+            <ListView Grid.Row="1" ItemsSource="{Binding Exercises}" SelectedItem="{Binding Exercice, Mode=OneWayToSource}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <BoxView HeightRequest="10" WidthRequest="10" BackgroundColor="Black"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:Anthenics.Converters"
+             xmlns:vm="clr-namespace:Anthenics.ViewModels" 
+             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+             x:Class="Anthenics.Views.WorkoutsPage">
+    <ContentPage.BindingContext>
+        <vm:WorkoutsViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <converter:IdToCustomerConverter x:Key="IdToCustomer"/>
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Like" Command="{Binding LoadLikeWorkoutsCommand}"/>
+                <Button Text="Clienti" Command="{Binding GoCustomersCommand}"/>
+                <Button Text="Esericizi" Command="{Binding GoExercisesCommand}"/>
+            </StackLayout>
+
+
+            <!--
+            <gradient:SfGradientView>
+                <gradient:SfGradientView.BackgroundBrush>
+                    <gradient:SfLinearGradientBrush>
+                        <gradient:SfLinearGradientBrush.GradientStops>
+                            <gradient:SfGradientStop Color="Red" Offset="0.0" />
+                            <gradient:SfGradientStop Color="Yellow" Offset="0.5" />
+                            <gradient:SfGradientStop Color="Blue" Offset="1.0" />
+                        </gradient:SfLinearGradientBrush.GradientStops>
+                    </gradient:SfLinearGradientBrush>
+                </gradient:SfGradientView.BackgroundBrush>
+            </gradient:SfGradientView>
+
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <buttons:SfButton x:Name="SfButton"/>
+            </StackLayout>
+            -->
+
+            <!--
+            <ImageButton Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent">
+                <ImageButton.Source>
+                    <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                                     Glyph="&#xf007;"/>
+                </ImageButton.Source>
+            </ImageButton>
+            
+            <buttons:SfButton Grid.Row="1" 
+                              CornerRadius="40"
+                              HorizontalOptions="End" VerticalOptions="End" Margin="40">
+                <buttons:SfButton.ImageSource>
+                    <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                                     Glyph="&#xf067;"/>
+                </buttons:SfButton.ImageSource>
+            </buttons:SfButton>
+            -->
+
+
+
+
+
+            <Expander Grid.Row="1" HorizontalOptions="End" VerticalOptions="End" Margin="40" Rotation="180">
+                <Expander.Header>
+                    <Frame Grid.Column="0" CornerRadius="40" BackgroundColor="Blue" Padding="10">
+                        <Image>
+                            <Image.Source>
+                                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                                    Glyph="&#xf067;"/>
+                            </Image.Source>
+
+                            <Image.Triggers>
+                                <DataTrigger TargetType="Image"
+                                             Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                             Value="True">
+
+                                    <Setter Property="Source">
+                                        <Setter.Value>
+                                            <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                                                 Glyph="&#xf00d;"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Image.Triggers>
+                            
+                        </Image>
+                    </Frame>
+                </Expander.Header>
+
+                <StackLayout Spacing="30" Margin="0,30,0,0">
+
+                    <Frame CornerRadius="40" BackgroundColor="Blue" Padding="10" Rotation="180">
+                        <ImageButton BackgroundColor="Transparent" >
+                            <ImageButton.Source>
+                                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                                    Glyph="&#xf067;"/>
+                            </ImageButton.Source>
+                        </ImageButton>
+                    </Frame>
+                    
+                    <Frame CornerRadius="40" BackgroundColor="Blue" Padding="10" Rotation="180">
+                        <ImageButton BackgroundColor="Transparent" >
+                            <ImageButton.Source>
+                                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                                     Glyph="&#xf002;"/>
+                            </ImageButton.Source>
+                        </ImageButton>
+                    </Frame>
+
+                </StackLayout>
+            </Expander>
+            
+            
+            
+            
+
+            <!--
+            <gradient:SfGradientView Grid.Row="1" HorizontalOptions="End" VerticalOptions="End" Margin="40">
+                <gradient:SfGradientView.BackgroundBrush>
+                    <gradient:SfLinearGradientBrush>
+                        <gradient:SfLinearGradientBrush.GradientStops>
+                            <gradient:SfGradientStop Color="Red" Offset="0.0" />
+                            <gradient:SfGradientStop Color="Yellow" Offset="0.5" />
+                            <gradient:SfGradientStop Color="Blue" Offset="1.0" />
+                        </gradient:SfLinearGradientBrush.GradientStops>
+                    </gradient:SfLinearGradientBrush>
+                </gradient:SfGradientView.BackgroundBrush>
+            </gradient:SfGradientView>
+
+            <Expander Grid.Row="1" Rotation="180" HorizontalOptions="End" VerticalOptions="End">
+                <Expander.Header>
+                    <ImageButton BackgroundColor="Blue" CornerRadius="40" Padding="10">
+                        <ImageButton.Source>
+                            <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                                     Glyph="&#xf067;"/>
+                        </ImageButton.Source>
+                    </ImageButton>
+                </Expander.Header>
+
+                <StackLayout Spacing="30" Margin="0,20">
+                    <Label Text="prova" TextColor="Black"/>
+                    <Label Text="prova"/>
+                    <Label Text="prova"/>
+                    <ImageButton BackgroundColor="Blue" CornerRadius="40" Padding="10">
+                        <ImageButton.Source>
+                            <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                                     Glyph="&#xf002;"/>
+                        </ImageButton.Source>
+                    </ImageButton>
+                </StackLayout>
+            </Expander>
+            -->
+            
+            <!--
+            <StackLayout Grid.Row="1" HorizontalOptions="End" VerticalOptions="End" Margin="40">
+                <ImageButton BackgroundColor="Blue" CornerRadius="40" Padding="10">
+                    <ImageButton.Source>
+                        <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                                     Glyph="&#xf067;"/>
+                    </ImageButton.Source>
+                </ImageButton>
+            </StackLayout>
+            -->
+            
+
+            
+            
+            
+            
+            <!--
+            <ListView Grid.Row="1" ItemsSource="{Binding Workouts}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding IdCustomer, Converter={StaticResource IdToCustomer}}"/>
+                            <Label Text="{Binding Date, StringFormat='{0:dd - MMMM - yyyy}'}" />
+                            <Label Text="{Binding Date, StringFormat='{0:hh:mm:ss}'}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            -->
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

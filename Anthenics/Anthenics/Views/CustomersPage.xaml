@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:Anthenics.ViewModels"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms" 
+             x:Class="Anthenics.Views.CustomersPage">
+    <ContentPage.BindingContext>
+        <vm:CustomersViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Add" Command="{Binding GoAddCustomerCommand}"/>
+                <Button Text="Back" Command="{Binding GoBackCommand}"/>
+            </StackLayout>
+
+
+            <ListView Grid.Row="1" ItemsSource="{Binding Customers}" SelectionMode="Single" SelectedItem="{Binding Customer, Mode=OneWayToSource}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding FullName}"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!--
+            <ListView Grid.Row="1" ItemsSource="{Binding Customers}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <BoxView HeightRequest="10" WidthRequest="10" BackgroundColor="Black"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            -->
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

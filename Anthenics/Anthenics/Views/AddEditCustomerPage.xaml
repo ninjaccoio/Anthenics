@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:Anthenics.ViewModels"
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:numeric="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Syncfusion.SfNumericUpDown.XForms"
+             x:Class="Anthenics.Views.AddEditCustomerPage">
+    <ContentPage.BindingContext>
+        <vm:AddEditCustomerViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid BackgroundColor="#FFF8F8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Row="1" BackgroundColor="#EDEDED" Margin="15" CornerRadius="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout>
+
+                        <inputLayout:SfTextInputLayout  Hint="Nome Completo"
+                                                        OutlineCornerRadius="50"
+                                                        ErrorText="Il nome non può essere vuoto"
+                                                        ErrorColor="Red"
+                                                        HasError="{Binding ShowFullNameError}"
+                                                        HorizontalOptions="Center"
+                                                        ContainerType="Outlined">
+                            <Entry Text="{Binding Customer.FullName}"/>
+                        </inputLayout:SfTextInputLayout>
+
+                        <inputLayout:SfTextInputLayout  Hint="Età"
+                                                        IsVisible="{Binding Customer.IsPersona}"
+                                                        OutlineCornerRadius="50"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        ContainerType="Outlined">
+                            <numeric:SfNumericUpDown Value="{Binding Customer.Age}" TextAlignment="Center" MaximumDecimalDigits="0" AllowNull="True" FormatString="n"/>
+                        </inputLayout:SfTextInputLayout>
+
+                        <Grid ColumnDefinitions="*,*">
+                            <inputLayout:SfTextInputLayout  Grid.Column="0"
+                                                            Hint="Altezza cm."
+                                                            IsVisible="{Binding Customer.IsPersona}"
+                                                            OutlineCornerRadius="50"
+                                                            HorizontalOptions="FillAndExpand"
+                                                            ContainerType="Outlined">
+                                <numeric:SfNumericUpDown Value="{Binding Customer.Height}" TextAlignment="Center" MaximumDecimalDigits="0" AllowNull="True" FormatString="n"/>
+                            </inputLayout:SfTextInputLayout>
+
+                            <inputLayout:SfTextInputLayout  Grid.Column="1"
+                                                            Hint="Peso cm."
+                                                            IsVisible="{Binding Customer.IsPersona}"
+                                                            OutlineCornerRadius="50"
+                                                            HorizontalOptions="FillAndExpand"
+                                                            ContainerType="Outlined">
+                                <numeric:SfNumericUpDown Value="{Binding Customer.Weight}" TextAlignment="Center" MaximumDecimalDigits="0" AllowNull="True" FormatString="n"/>
+                            </inputLayout:SfTextInputLayout>
+                        </Grid>
+
+                    </StackLayout>
+
+                    <border:SfBorder Grid.Row="1" HorizontalOptions="Center" CornerRadius="50">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0" BackgroundColor="{Binding SwitchBackgroundColor1}">
+                                <Button Text="{Binding SwitchText1}" TextColor="{Binding SwitchTextColor1}" Command="{Binding SetState1Command}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HeightRequest="50" BackgroundColor="Transparent"/>
+                            </Grid>
+
+                            <Grid Grid.Column="1" BackgroundColor="{Binding SwitchBackgroundColor2}">
+                                <Button Text="{Binding SwitchText2}" TextColor="{Binding SwitchTextColor2}" Command="{Binding SetState2Command}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HeightRequest="50" BackgroundColor="Transparent"/>
+                            </Grid>
+
+                        </Grid>
+                    </border:SfBorder>
+
+                </Grid>
+            </Frame>
+
+            <ActivityIndicator Grid.Row="2" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
+            <Button Grid.Row="3" Text="{Binding ButtonText}" Command="{Binding SaveUpdateCommand}" CornerRadius="50" Margin="10"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
